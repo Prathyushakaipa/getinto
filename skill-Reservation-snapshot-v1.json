@@ -1,0 +1,653 @@
+{
+  "intents": [
+    {
+      "intent": "greetings",
+      "examples": [
+        {
+          "text": "hi"
+        },
+        {
+          "text": "hello"
+        },
+        {
+          "text": "hello buddy"
+        },
+        {
+          "text": "namasthe"
+        }
+      ],
+      "description": "greetings"
+    },
+    {
+      "intent": "make_reservation",
+      "examples": [
+        {
+          "text": "please reserve a ticket for me"
+        },
+        {
+          "text": "i want make a reservation"
+        },
+        {
+          "text": "i want to go to hyderabad"
+        }
+      ],
+      "description": "to make a resevation"
+    },
+    {
+      "intent": "cancel_reservation",
+      "examples": [
+        {
+          "text": "cacel my resevation"
+        },
+        {
+          "text": "i want to cancel my ticket"
+        },
+        {
+          "text": "i am not ready to go now"
+        },
+        {
+          "text": "i want to cancel my tour"
+        }
+      ],
+      "description": "to cancel a reservation"
+    },
+    {
+      "intent": "reschedule_reservation",
+      "examples": [
+        {
+          "text": "I am not going today"
+        },
+        {
+          "text": "Reschedule my resevation"
+        }
+      ],
+      "description": "reschedule the reservation"
+    }
+  ],
+  "entities": [
+    {
+      "entity": "sys-location",
+      "values": [],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "sys-person",
+      "values": [],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "sys-time",
+      "values": [],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "sys-number",
+      "values": [],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "y_n",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "yes",
+          "synonyms": [
+            "hmmm",
+            "nope",
+            "if",
+            "yup",
+            "sure",
+            "so",
+            "oh",
+            "yep",
+            "okay",
+            "yeah",
+            "yes"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "no",
+          "synonyms": [
+            "only",
+            "not",
+            "any",
+            "there",
+            "lack",
+            "neither",
+            "never",
+            "none",
+            "without",
+            "nothing",
+            "no"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "city",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "hyderabad",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "kolkata",
+          "synonyms": [
+            "calcutta"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "banglore",
+          "synonyms": [
+            "bengaluru"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "sys-date",
+      "values": [],
+      "fuzzy_match": true
+    }
+  ],
+  "language": "en",
+  "metadata": {
+    "skill": {
+      "counts": {
+        "intents": 4,
+        "entities": 7,
+        "dialog_nodes": 34
+      }
+    },
+    "api_version": {
+      "major_version": "v1",
+      "minor_version": "2018-11-08"
+    }
+  },
+  "dialog_nodes": [
+    {
+      "type": "event_handler",
+      "output": {
+        "text": {
+          "values": [
+            "how many are going"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "slot_1_1587975286253",
+      "event_name": "focus",
+      "dialog_node": "handler_4_1587975286258",
+      "previous_sibling": "handler_9_1587975286258"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_1_1587975286253",
+      "context": {
+        "number": "@sys-number"
+      },
+      "conditions": "@sys-number",
+      "event_name": "input",
+      "dialog_node": "handler_9_1587975286258"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "text": {
+          "values": [
+            "where do you want to go?"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "slot_1_1587975250308",
+      "event_name": "focus",
+      "dialog_node": "handler_3_1587975250314",
+      "previous_sibling": "handler_1_1587975250314"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_1_1587975250308",
+      "context": {
+        "location": "@sys-location"
+      },
+      "conditions": "@sys-location",
+      "event_name": "input",
+      "dialog_node": "handler_1_1587975250314"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "please enterplace,date,time,number of people,person name to book a ticket"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_7_1587974549050",
+      "event_name": "focus",
+      "dialog_node": "handler_1_1587975151845",
+      "previous_sibling": "node_2_1587981152626"
+    },
+    {
+      "type": "slot",
+      "parent": "node_7_1587974549050",
+      "variable": "$time",
+      "dialog_node": "slot_1_1587975445080",
+      "previous_sibling": "slot_1_1587975286253"
+    },
+    {
+      "type": "slot",
+      "parent": "node_7_1587974549050",
+      "variable": "$date",
+      "dialog_node": "slot_7_1587975152525",
+      "previous_sibling": "slot_1_1587975250308"
+    },
+    {
+      "type": "slot",
+      "output": {},
+      "parent": "node_7_1587974549050",
+      "variable": "$person",
+      "dialog_node": "slot_1_1587975317068",
+      "previous_sibling": "slot_1_1587975445080"
+    },
+    {
+      "type": "slot",
+      "parent": "node_7_1587974549050",
+      "variable": "$location",
+      "dialog_node": "slot_1_1587975250308",
+      "previous_sibling": "handler_1_1587975151845"
+    },
+    {
+      "type": "slot",
+      "parent": "node_7_1587974549050",
+      "variable": "$number",
+      "dialog_node": "slot_1_1587975286253",
+      "previous_sibling": "slot_7_1587975152525"
+    },
+    {
+      "type": "standard",
+      "title": "yes or no",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "okay done"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_7_1587974549050",
+      "conditions": "@y_n",
+      "dialog_node": "node_2_1587981152626"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "text": {
+          "values": [
+            "please enter a new date to schedule"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "slot_5_1587978862361",
+      "event_name": "focus",
+      "dialog_node": "handler_3_1587978862381",
+      "previous_sibling": "handler_2_1587978862381"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_5_1587978862361",
+      "context": {
+        "date": "@sys-date"
+      },
+      "conditions": "@sys-date",
+      "event_name": "input",
+      "dialog_node": "handler_2_1587978862381"
+    },
+    {
+      "type": "slot",
+      "parent": "node_9_1587978514538",
+      "variable": "$number",
+      "dialog_node": "slot_5_1587978691491"
+    },
+    {
+      "type": "slot",
+      "parent": "node_9_1587978830359",
+      "variable": "$time",
+      "dialog_node": "slot_10_1587978974858",
+      "previous_sibling": "slot_5_1587978862361"
+    },
+    {
+      "type": "slot",
+      "parent": "node_9_1587978830359",
+      "variable": "$date",
+      "dialog_node": "slot_5_1587978862361",
+      "previous_sibling": "slot_5_1587978915486"
+    },
+    {
+      "type": "slot",
+      "parent": "node_9_1587978830359",
+      "variable": "$number",
+      "dialog_node": "slot_5_1587978915486"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "text": {
+          "values": [
+            "At what time would you like to travel?"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "slot_1_1587975445080",
+      "event_name": "focus",
+      "dialog_node": "handler_3_1587975445087",
+      "previous_sibling": "handler_9_1587975445087"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_1_1587975445080",
+      "context": {
+        "time": "@sys-time"
+      },
+      "conditions": "@sys-time",
+      "event_name": "input",
+      "dialog_node": "handler_9_1587975445087"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "text": {
+          "values": [
+            "At what time would you like to make your journey?"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "slot_10_1587978974858",
+      "event_name": "focus",
+      "dialog_node": "handler_8_1587978974864",
+      "previous_sibling": "handler_2_1587978974864"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_10_1587978974858",
+      "context": {
+        "time": "@sys-time"
+      },
+      "conditions": "@sys-time",
+      "event_name": "input",
+      "dialog_node": "handler_2_1587978974864"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "text": {
+          "values": [
+            "tell me the person details"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "slot_1_1587975317068",
+      "event_name": "focus",
+      "dialog_node": "handler_9_1587975317075",
+      "previous_sibling": "handler_8_1587975317075"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_1_1587975317068",
+      "context": {
+        "person": "@sys-person"
+      },
+      "conditions": "@sys-person",
+      "event_name": "input",
+      "dialog_node": "handler_8_1587975317075"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "text": {
+          "values": [
+            "when do you want to go?"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "slot_7_1587975152525",
+      "event_name": "focus",
+      "dialog_node": "handler_6_1587975152552",
+      "previous_sibling": "handler_1_1587975152552"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_7_1587975152525",
+      "context": {
+        "date": "@sys-date"
+      },
+      "conditions": "@sys-date",
+      "event_name": "input",
+      "dialog_node": "handler_1_1587975152552"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "text": {
+          "values": [
+            "please enter your reservation number."
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "slot_5_1587978915486",
+      "event_name": "focus",
+      "dialog_node": "handler_5_1587978915491",
+      "previous_sibling": "handler_4_1587978915491"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_5_1587978915486",
+      "context": {
+        "number": "@sys-number"
+      },
+      "conditions": "@sys-number",
+      "event_name": "input",
+      "dialog_node": "handler_4_1587978915491"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "text": {
+          "values": [
+            "please enter your reservation number!"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "slot_5_1587978691491",
+      "event_name": "focus",
+      "dialog_node": "handler_6_1587978691509",
+      "previous_sibling": "handler_7_1587978691509"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_5_1587978691491",
+      "context": {
+        "number": "@sys-number"
+      },
+      "conditions": "@sys-number",
+      "event_name": "input",
+      "dialog_node": "handler_7_1587978691509"
+    },
+    {
+      "type": "frame",
+      "title": "reschedule reservation",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "okay. Journey is rescheduled on $date at $time"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#reschedule_reservation",
+      "digress_in": "does_not_return",
+      "dialog_node": "node_9_1587978830359",
+      "previous_sibling": "node_7_1587974549050"
+    },
+    {
+      "type": "standard",
+      "title": "Anything else",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "I didn't understand. You can try rephrasing."
+              },
+              {
+                "text": "Can you reword your statement? I'm not understanding."
+              },
+              {
+                "text": "I didn't get your meaning."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "anything_else",
+      "dialog_node": "Anything else",
+      "previous_sibling": "node_9_1587978514538",
+      "disambiguation_opt_out": true
+    },
+    {
+      "type": "frame",
+      "title": "make reservation",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "okay.I am going to book $number ticket to $location on $date at $time for  $person"
+              },
+              {
+                "text": "Do you confirm the reservation?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#make_reservation",
+      "dialog_node": "node_7_1587974549050",
+      "previous_sibling": "Welcome"
+    },
+    {
+      "type": "frame",
+      "title": "cancel reservation",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Are you sure to cancel reservation?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#cancel_reservation",
+      "digress_in": "does_not_return",
+      "dialog_node": "node_9_1587978514538",
+      "previous_sibling": "node_9_1587978830359"
+    },
+    {
+      "type": "standard",
+      "title": "Welcome",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Hello."
+              },
+              {
+                "text": "I am a chatbot named Bean. How can I help you?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "context": {},
+      "conditions": "#greetings || welcome",
+      "dialog_node": "Welcome"
+    }
+  ],
+  "counterexamples": [
+    {
+      "text": "8:00pm"
+    }
+  ],
+  "system_settings": {
+    "off_topic": {
+      "enabled": true
+    },
+    "disambiguation": {
+      "prompt": "Did you mean:",
+      "enabled": true,
+      "randomize": true,
+      "max_suggestions": 5,
+      "suggestion_text_policy": "title",
+      "none_of_the_above_prompt": "None of the above"
+    },
+    "system_entities": {
+      "enabled": true
+    },
+    "human_agent_assist": {
+      "prompt": "Did you mean:"
+    },
+    "spelling_auto_correct": true
+  },
+  "learning_opt_out": false,
+  "name": "Reservation"
+}
