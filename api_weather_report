@@ -1,7 +1,0 @@
-import requests
-url='https://api.openweathermap.org/data/2.5/weather?appid=e625f6ad6605071357db348c519522ee&q='
-while(1):
-  city=input("city_name:")
-  my_url=url+city
-  data=requests.get(my_url).json()
-  print("the weather report:\n\n",data)
